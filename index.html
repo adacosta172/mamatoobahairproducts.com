@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mama Tooba Hair Products</title>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Fira Sans", sans-serif;
+      background: #fffaf5;
+      color: #2b1d14;
+      line-height: 1.6;
+    }
+    a { color: inherit; }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: #5a2d18;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      padding: 14px 7%;
+      box-shadow: 0 4px 18px rgba(0,0,0,.15);
+    }
+    .logo { display: flex; align-items: center; gap: 10px; font-size: 24px; font-weight: 800; white-space: nowrap; }
+    .logo img { width: 58px; height: 58px; object-fit: contain; background: #fff; border-radius: 50%; padding: 4px; }
+    nav { display: flex; gap: 14px; flex-wrap: wrap; }
+    nav a { color: #fff; text-decoration: none; font-size: 14px; font-weight: 700; }
+
+    .hero {
+      min-height: 76vh;
+      background: linear-gradient(120deg, rgba(90,45,24,.96), rgba(196,122,60,.88));
+      color: #fff;
+      display: flex;
+      align-items: center;
+      padding: 7%;
+    }
+    .hero-wrap { display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; width: 100%; }
+    .hero-text { max-width: 600px; }
+    .hero h1 { font-size: clamp(26px, 4vw, 42px); line-height: 1.15; }
+    .hero p { margin: 20px 0; font-size: 18px; }
+    .hero-img { flex: 1; min-width: 280px; text-align: center; }
+    .hero-img img { width: 100%; max-width: 420px; border-radius: 22px; box-shadow: 0 10px 25px rgba(0,0,0,.3); background:#fff; }
+
+    .btn {
+      display: inline-block;
+      background: #f3c27b;
+      color: #2b1d14;
+      padding: 12px 20px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: 800;
+      text-align: center;
+      transition: .2s;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,.16); }
+    .btn.secondary { background: #fff; margin-left: 10px; }
+    .btn.danger { background: #ffdddd; color: #8b0000; }
+    .btn.small { padding: 7px 12px; font-size: 13px; width: auto; }
+
+    .section, .benefits { padding: 60px 10%; }
+    .section h2, .benefits h2 { text-align: center; margin-bottom: 28px; color: #5a2d18; font-size: 32px; }
+    .grid, .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; }
+    .grid > div, .product-card, .cart-item, .admin-card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 18px;
+      box-shadow: 0 5px 18px rgba(0,0,0,.08);
+    }
+
+    .product-card img { width: 100%; height: 220px; object-fit: cover; border-radius: 15px; background: #ead2b5; }
+    .product-card h3 { margin-top: 12px; color: #5a2d18; }
+    .product-card p { margin: 8px 0; }
+    .price { font-size: 20px; color: #7a3a1a; font-weight: 800; margin: 8px 0; }
+
+    .cart-section { background: #f7eadc; }
+    .cart-item { margin-bottom: 15px; display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+    .cart-controls button { padding: 6px 11px; margin: 0 4px; cursor: pointer; border: none; border-radius: 8px; background: #5a2d18; color: #fff; }
+    .cart-controls button:last-child { background: #b43c2c; }
+    .total-box { text-align: right; font-size: 22px; margin-top: 18px; color: #5a2d18; }
+
+    .checkout form { max-width: 650px; margin: auto; display: grid; gap: 15px; }
+    input, select, textarea { font-family: inherit; padding: 14px; border-radius: 10px; border: 1px solid #c9a77e; font-size: 16px; background: #fff; width: 100%; }
+    textarea { min-height: 100px; }
+    .notice { background: #fff3d7; border-left: 5px solid #f3c27b; padding: 14px; border-radius: 10px; max-width: 850px; margin: 0 auto 22px; }
+
+    details { background: #fff; margin: 12px auto; padding: 15px; max-width: 850px; border-radius: 10px; box-shadow: 0 3px 12px rgba(0,0,0,.06); }
+    summary { font-weight: 800; cursor: pointer; color: #5a2d18; }
+    .contact { text-align: center; }
+    .admin-card { max-width: 950px; margin: auto; }
+    .order-box { border: 1px solid #ead2b5; border-radius: 14px; padding: 15px; margin: 14px 0; background: #fffaf5; }
+    .muted { color: #6c5b51; font-size: 14px; }
+    footer { text-align: center; padding: 25px; background: #5a2d18; color: #fff; }
+
+    .whatsapp-float {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: #25d366;
+      color: #fff;
+      font-size: 16px;
+      padding: 14px 18px;
+      border-radius: 30px;
+      text-decoration: none;
+      z-index: 1000;
+      box-shadow: 0 6px 18px rgba(0,0,0,.25);
+      font-weight: 800;
+    }
+
+    .chatbot { position: fixed; bottom: 90px; right: 25px; z-index: 1000; }
+    #chatToggle { background: #5a2d18; color: #fff; padding: 12px 18px; border-radius: 25px; border: none; cursor: pointer; font-weight: 800; }
+    .chat-box { display: none; width: 340px; background: #fff; margin-top: 10px; border-radius: 15px; box-shadow: 0 5px 18px rgba(0,0,0,.25); overflow: hidden; }
+    .chat-head { background: #5a2d18; color: #fff; padding: 12px; font-weight: 800; }
+    .quick-replies { display: flex; gap: 6px; flex-wrap: wrap; padding: 10px; border-bottom: 1px solid #eee; }
+    .quick-replies button { border: none; background: #f3c27b; color: #2b1d14; border-radius: 20px; padding: 7px 10px; font-size: 12px; font-weight: 700; cursor: pointer; }
+    #chatMessages { height: 300px; overflow-y: auto; padding: 15px; font-size: 14px; }
+    .bot, .user { margin-bottom: 10px; padding: 10px; border-radius: 12px; }
+    .bot { background: #f3e3d0; }
+    .user { background: #d9f7d9; text-align: right; }
+    #chatInput { width: 100%; border-radius: 0; border: none; border-top: 1px solid #ddd; }
+
+    @media (max-width: 760px) {
+      .header { flex-direction: column; align-items: flex-start; padding: 10px 4%; }
+      .logo img { width: 46px; height: 46px; }
+      .header nav { display: flex; gap: 8px; overflow-x: auto; white-space: nowrap; width: 100%; scrollbar-width: none; }
+      nav a { font-size: 12px; background: rgba(255,255,255,.14); padding: 7px 10px; border-radius: 18px; }
+      .hero { padding: 35px 4% 45px; }
+      .hero-wrap { flex-direction: column; text-align: center; }
+      .hero h1 { font-size: 31px; }
+      .hero .btn { display: block; width: 100%; max-width: 310px; margin: 10px auto 0; }
+      .btn.secondary { margin-left: 0; }
+      .hero-img img { max-width: 310px; }
+      .section, .benefits { padding: 38px 4%; }
+      .section h2, .benefits h2 { font-size: 25px; }
+      .grid, .product-grid { grid-template-columns: 1fr; gap: 14px; }
+      .product-card img { height: 190px; }
+      .cart-item { display: block; }
+      .cart-controls { margin-top: 12px; display: flex; gap: 6px; flex-wrap: wrap; }
+      .btn { width: 100%; border-radius: 16px; }
+      .btn.small { width: auto; }
+      .whatsapp-float { right: 15px; bottom: 18px; }
+      .chatbot { right: 14px; bottom: 78px; }
+      .chat-box { width: calc(100vw - 28px); max-width: 360px; }
+      #chatMessages { height: 260px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <img src="logo.png" alt="Mama Tooba Products Logo" />
+      <span>Mama Tooba Hair Products</span>
+    </div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#products">Products</a>
+      <a href="#checkout">Order</a>
+      <a href="#agents">Agent List</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="hero-wrap">
+      <div class="hero-text">
+        <h1>Natural Hair Care for <br />Healthy, Beautiful Hair</h1>
+        <p>Browse Mama Tooba Hair Products, add to cart, and send your order directly through WhatsApp. Agents are available across the whole world.</p>
+        <a href="#products" class="btn">Shop Products</a>
+        <a href="#checkout" class="btn secondary">Order on WhatsApp</a>
+      </div>
+      <div class="hero-img">
+        <img src="tooba gal.jpeg" alt="Healthy growing hair" />
+      </div>
+    </div>
+  </section>
+
+  <section class="benefits">
+    <h2>Why Choose Mama Tooba?</h2>
+    <div class="grid">
+      <div>Natural-inspired hair care</div>
+      <div>Give your hair the natural care</div>
+      <div>Pickup and delivery options</div>
+      <div>Fast WhatsApp ordering</div>
+    </div>
+  </section>
+
+  <section id="products" class="section">
+    <h2>Our Products</h2>
+    <div id="productList" class="product-grid"></div>
+  </section>
+
+  <section id="cart" class="section cart-section">
+    <h2>Your Cart</h2>
+    <div id="cartItems"></div>
+    <div class="total-box"><strong>Total: GH₵ <span id="cartTotal">0</span></strong></div>
+    <div style="text-align:right;margin-top:15px;"><button class="btn" onclick="goToCheckout()">Place Order Now</button></div>
+  </section>
+
+  <section id="checkout" class="section checkout">
+    <h2>Place Your Order</h2>
+    <div class="notice">Tick products, add quantities, then click <strong>Add Selected Products to Cart</strong> or fill your details and submit directly to WhatsApp.</div>
+
+    <div class="admin-card" style="margin-bottom:25px;">
+      <h3 style="color:#5a2d18;margin-bottom:10px;">Select Products and Quantities</h3>
+      <p class="muted">Products added to cart will be selected automatically.</p>
+      <div id="orderProductList" class="grid" style="margin-top:15px;"></div>
+      <div style="margin-top:15px;display:flex;gap:10px;flex-wrap:wrap;">
+        <button type="button" class="btn" onclick="addSelectedProductsToCart()">Add Selected Products to Cart</button>
+        <button type="button" class="btn secondary" onclick="goToCheckout()">Continue Order</button>
+      </div>
+    </div>
+
+    <form id="orderForm">
+      <input type="text" id="customerName" placeholder="Full Name" required />
+      <input type="tel" id="customerPhone" placeholder="Phone Number" required />
+      <input type="text" id="customerLocation" placeholder="Location" required />
+      <select id="deliveryOption" required>
+        <option value="">Select Delivery Option</option>
+        <option value="Pickup">Pickup</option>
+        <option value="Delivery">Delivery</option>
+      </select>
+      <textarea id="extraNotes" placeholder="Extra notes"></textarea>
+
+      <div class="admin-card" style="box-shadow:none;border:1px solid #ead2b5;">
+        <h3 style="color:#5a2d18;margin-bottom:8px;">Mobile Money Payment</h3>
+        <p><strong>Network:</strong> <span id="momoProviderText">MTN Mobile Money</span></p>
+        <p><strong>MoMo Number:</strong> <span id="momoNumberText">0241099968</span></p>
+        <p><strong>Account Name:</strong> <span id="momoNameText">Mama Tooba Products</span></p>
+        <p class="muted">Click prepare payment to see amount and payment instruction. After payment, enter your transaction ID below.</p>
+        <input type="text" id="paymentReference" placeholder="Mobile Money Transaction ID / Reference" />
+      </div>
+
+      <button type="button" class="btn secondary" onclick="prepareMomoPayment()">Prepare Mobile Money Payment</button>
+      <button type="submit" class="btn">Submit Order to WhatsApp</button>
+      <a class="btn secondary" target="_blank" href="https://wa.me/233241099968?text=Hello%20Mama%20Tooba%2C%20please%20I%20need%20help%20choosing%20the%20right%20hair%20product.">Chat on WhatsApp</a>
+    </form>
+  </section>
+
+  <section id="about" class="section about">
+    <h2>About Mama Tooba Hair Products</h2>
+    <p style="max-width:900px;margin:auto;text-align:center;">Mama Tooba hair products are made from a combination of six herbs, uniquely blended into shampoo, conditioner, 3 in 1 hair food, hair oil and setting lotion. The products support quick, strong, long and healthy-looking hair and are used for common hair and scalp concerns such as receding edges, breakages, dandruff, itchy scalp, hair loss, thinning, baldness and unpleasant scalp odour. Suitable for natural, permed and dreadlocks.<br /><br /><strong>Grow healthy, beautiful long hair with Mama Tooba Hair Products.</strong></p>
+    <div class="grid" style="margin-top:25px;max-width:900px;margin-left:auto;margin-right:auto;"><div>Stop dandruff & itchy scalp</div><div>Promote fast hair growth</div><div>Reduce hair fall & breakage</div><div>Moisturize and soften hair</div><div>Give you thicker, healthier hair</div><div>Removes Bad Smell</div></div>
+    
+  </section>
+
+  <section class="section testimonials">
+  <h2>Customer Testimonials</h2>
+  <div class="grid">
+
+    <div class="testimonial-box">
+      <img src="before-test1.jpeg" alt="Before use" style="width:45%;border-radius:10px;margin-bottom:6px;">
+      <img src="after-test1.jpeg" alt="After use" style="width:40%;border-radius:10px;margin-bottom:6px;">
+      <p>“My hair was dry and breaking, but after using Mama Tooba products, it looks healthier and fuller.”</p>
+    </div>
+
+    <div class="testimonial-box">
+     <img src="before-test1.jpeg" alt="Before use" style="width:45%;border-radius:10px;margin-bottom:6px;">
+      <img src="after-test1.jpeg" alt="After use" style="width:40%;border-radius:10px;margin-bottom:6px;">
+      <p>“I had dandruff and itchy scalp. After consistent use, my scalp feels clean and comfortable.”</p>
+    </div>
+
+    <div class="testimonial-box">
+      <img src="before-test1.jpeg" alt="Before use" style="width:45%;border-radius:10px;margin-bottom:6px;">
+      <img src="aftertest1.jpeg" alt="After use" style="width:40%;border-radius:10px;margin-bottom:6px;">
+      <p>“My edges were weak, but now they look better and stronger after using Mama Tooba.”</p>
+    </div>
+
+  </div>
+</section>
+
+  <section id="agents" class="section"><h2>View Agent List</h2><div class="admin-card"><div class="grid">
+    <div><strong>CENTRAL REGION</strong><br />KASOA - 0541491515<br />AJUMAKO - 0551535874<br />GOMOA ESHIEM - 0245092137<br />CAPE COAST 1 - 0246715412<br />CAPE COAST 2 - 0541589178<br />CAPE COAST UCC - 0243562330<br />AGONA SWEDRU - 0242827691</div>
+    <div><strong>GREATER ACCRA</strong><br />WEIJA - 0242585541<br />LAPAZ - 0249878010<br />ABLEKUMA - 0244561837<br />AMASAMAN - 0244888303<br />ABELEMKPE - 0245797667<br />HAATSO - 0533342361<br />ASHAIMAN - 0242018003<br />MALLAM MARKET - 0244709744<br />EAST LEGON - 0241760362<br />SAKOMONO - 0242779714</div>
+    <div><strong>EASTERN REGION</strong><br />KOFORIDUA 1 - 0554034518<br />KOFORIDUA 2 - 0200156119<br />KIBI - 0546620921<br />AKOSOMBO - 0554035979<br />KWAHU - 0547596008<br />AKIM ODA - 0542045070</div>
+    <div><strong>BRONG AHAFO REGION</strong><br />TECHIMAN 1 - 0241633378<br />TECHIMAN 2 - 0256457887<br />SUNYANI - 0203151831 / 0554681144<br />KINTAMPO - 0540278132</div>
+    <div><strong>WESTERN REGION</strong><br />TARKWA - 0248835513<br />TAKORADI - 0248434247 / 0553596225<br />SEFWI BIBIANI - 0547301763<br />SEKONDI - 0242847245</div>
+    <div><strong>ASHANTI REGION</strong><br />OBUASI - 0245730111<br />ATONSU - 0548890512<br />NKORANSA - 0549064170<br />PANKRONO - 0241252645<br />EJISU - 0538308611</div>
+    <div><strong>VOLTA REGION</strong><br />HO - 0245160014</div><div><strong>NORTHERN REGION</strong><br />TAMALE - 0249946137</div><div><strong>UPPER WEST REGION</strong><br />WA - 0546793405</div><div><strong>UPPER EAST REGION</strong><br />NAVRONGO - 0549131713</div><div><strong>OTI REGION</strong><br />DAMBAI - 0241028421</div><div><strong>INTERNATIONAL</strong><br />EQUATORIAL GUINEA - +234 222 022 653<br />JAMAICA - +1 876 894 1596<br />UNITED KINGDOM - +44 74 8521 6963</div>
+  </div></div></section>
+
+  <section id="admin" class="section"><h2>Order List / Admin Area</h2><div class="admin-card"><p class="muted">All orders placed on this browser will appear here. You can view, download, or clear saved orders.</p><div style="display:flex;gap:10px;flex-wrap:wrap;margin:15px 0;"><button class="btn small" onclick="renderOrders()">Refresh Order List</button><button class="btn small" onclick="downloadOrders()">Download Orders</button><button class="btn danger small" onclick="clearOrders()">Clear Saved Orders</button></div><div id="savedOrders"></div></div></section>
+
+  <section id="contact" class="section contact"><h2>Contact Mama Tooba</h2><p><strong>WhatsApp:</strong> 0241099968</p><p><strong>Mobile:</strong> 0597620655</p><p><strong>Email:</strong> mamatoobaproducts@gmail.com</p><p><strong>Location:</strong> Central Region, Ghana</p><p><strong>Agents:</strong> Available across the whole world</p><p><strong>Facebook / Instagram:</strong> @MamaToobaProducts</p></section>
+  <footer><p>&copy; 2026 Mama Tooba Hair Product. All rights reserved.</p></footer>
+
+  <a id="floatWhatsApp" href="https://wa.me/233241099968?text=Hello%20Mama%20Tooba%2C%20I%20want%20to%20make%20an%20enquiry%20about%20your%20hair%20products." class="whatsapp-float" target="_blank" title="Chat with Mama Tooba on WhatsApp">WhatsApp</a>
+
+  <div class="chatbot"><button id="chatToggle" type="button">AI Assistant</button><div id="chatBox" class="chat-box"><div class="chat-head">Mama Tooba AI Assistant</div><div class="quick-replies"><button type="button" onclick="quickAsk('Recommend products for hair growth')">Hair Growth</button><button type="button" onclick="quickAsk('What can I use for dandruff')">Dandruff</button><button type="button" onclick="quickAsk('I have receding edges')">Edges</button><button type="button" onclick="quickAsk('How do I place an order')">Order</button><button type="button" onclick="quickAsk('Show agent list')">Agents</button></div><div id="chatMessages"></div><input type="text" id="chatInput" placeholder="Ask about hair products..." /></div></div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const mamaToobaWhatsAppNumber = "233241099968";
+
+      /* PRODUCT IMAGE EDIT AREA
+         Do not use URL links here. Put your pictures in an assets folder and change the image names below.
+         Example: image: "assets/shampoo.jpg"
+      */
+      const products = [
+        { id: 1, name: "Mama Tooba Shampoo", price: 80, image: "shampoo.png", description: "Cleanses scalp and hair, removes dirt, sweat, and product buildup, Prepares hair for treatment.", benefits: "Deep cleans without stripping natural oils, Fights dandruff and scalp infections, reduces itching and flakes, strengthens roots and reduces breakage." },
+        { id: 2, name: "Mama Tooba Conditioner", price: 80, image: "conditioner.png", description: "Conditioner for Softens hair after washing, detangles hair, Restores moisture.", benefits: "Makes hair smooth and easy to comb, reduces breakage and split ends, improves shine and elasticity, Nourishes hair strands from root to tip." },
+        { id: 3, name: "Mama Tooba Hair Oil", price: 50, image: "hair-oil.png", description: "Hair oil for Scalp treatment, Hair growth stimulation, Sealing moisture.", benefits: "Helps Promotes fast, healthy hair growth, prevents dandruff and scalp infections, strengthens hair roots, adds natural shine, reduces hair loss and thinning" },
+        { id: 4, name: "Mama Tooba 3 in 1 Hair Food", price: 40, image: "3-in-1-hair-food.png", description: "Rich hair food for Daily or weekly hair nourishment, protects hair from dryness, Supports hair growth.", benefits: "Deep nourishment for weak hair, keeps scalp moisturized, reduces breakage and dryness, Supports thicker, fuller hair." },
+        { id: 5, name: "Mama Tooba Setting Lotion", price: 30, image: "setting-lotion.png", description: "Setting lotion for Styling and setting hair, Helps hold curls, waves, and styles, Adds moisture during styling.", benefits: "Light hold without stiffness, keeps hair hydrated while styling, Promotes healthy scalp even with frequent styling." },
+        { id: 6, name: "Mama Tooba Hair Booster Powder", price: 100, image: "booster-powder.jpg", description: "Hair booster powder to support your hair care routine.", benefits: "Use as directed as part of your normal hair care process." },
+        { id: 7, name: "Mama Tooba Super Treatment Hair Food", price: 100, image: "super-treatment.jpg", description: "Special treatment hair food for deeper hair care routine.", benefits: "Helps nourish and maintain healthy-looking hair." },
+        { id: 8, name: "Mama Tooba 5 in 1 Beauty Pack (Set)", price: 230, image: "5-in-1-beauty-pack.jpeg", description: "It contains shampoo, conditioner, hair oil, setting lotion and 3-in-1 hair food.", benefits: "Available at a discount price." }
+      ];
+
+      const momoDetails = {
+        provider: "MTN Mobile Money",
+        accountName: "Mama Tooba Products",
+        momoNumber: "0241099968"
+      };
+
+      let cart = [];
+      const productList = document.getElementById("productList");
+      const cartItems = document.getElementById("cartItems");
+      const cartTotal = document.getElementById("cartTotal");
+      const orderForm = document.getElementById("orderForm");
+      const chatToggle = document.getElementById("chatToggle");
+      const chatBox = document.getElementById("chatBox");
+      const chatMessages = document.getElementById("chatMessages");
+      const chatInput = document.getElementById("chatInput");
+
+      function safeHTML(value) {
+        return String(value).replace(/[&<>\"]/g, function (character) {
+          return { "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;" }[character];
+        });
+      }
+
+      function displayProducts() {
+        productList.innerHTML = "";
+        products.forEach(function (product) {
+          productList.insertAdjacentHTML("beforeend", "<div class='product-card'><img src='" + safeHTML(product.image) + "' alt='" + safeHTML(product.name) + "'><h3>" + safeHTML(product.name) + "</h3><p>" + safeHTML(product.description) + "</p><p><strong>Benefits:</strong> " + safeHTML(product.benefits) + "</p><div class='price'>GHS " + product.price + "</div><button class='btn' onclick='addToCart(" + product.id + ")'>Add to Cart</button><button class='btn secondary' style='margin-top:10px;margin-left:0;' onclick='orderNowProduct(" + product.id + ")'>Order Now</button></div>");
+        });
+      }
+
+      function addToCart(productId) {
+        const product = products.find(function (item) { return item.id === productId; });
+        if (!product) return;
+        const existingItem = cart.find(function (item) { return item.id === productId; });
+        if (existingItem) existingItem.quantity += 1;
+        else cart.push(Object.assign({}, product, { quantity: 1 }));
+        updateCart();
+      }
+
+      function removeFromCart(productId) { cart = cart.filter(function (item) { return item.id !== productId; }); updateCart(); }
+      function increaseQuantity(productId) { const item = cart.find(function (cartItem) { return cartItem.id === productId; }); if (item) item.quantity += 1; updateCart(); }
+      function decreaseQuantity(productId) { const item = cart.find(function (cartItem) { return cartItem.id === productId; }); if (!item) return; if (item.quantity > 1) item.quantity -= 1; else removeFromCart(productId); updateCart(); }
+      function goToCheckout() { document.getElementById("checkout").scrollIntoView({ behavior: "smooth" }); }
+      function orderNowProduct(productId) { addToCart(productId); goToCheckout(); }
+
+      function updateCart() {
+        cartItems.innerHTML = "";
+        if (cart.length === 0) {
+          cartItems.innerHTML = "<p>Your cart is empty.</p>";
+          cartTotal.textContent = "0";
+          renderOrderProductSelection();
+          return;
+        }
+        let total = 0;
+        cart.forEach(function (item) {
+          total += item.price * item.quantity;
+          cartItems.insertAdjacentHTML("beforeend", "<div class='cart-item'><div><strong>" + safeHTML(item.name) + "</strong><br>GHS " + item.price + " x " + item.quantity + "</div><div class='cart-controls'><button onclick='decreaseQuantity(" + item.id + ")'>-</button><span>" + item.quantity + "</span><button onclick='increaseQuantity(" + item.id + ")'>+</button><button onclick='removeFromCart(" + item.id + ")'>Remove</button></div></div>");
+        });
+        cartTotal.textContent = String(total);
+        renderOrderProductSelection();
+      }
+
+      function renderOrderProductSelection() {
+        const orderProductList = document.getElementById("orderProductList");
+        orderProductList.innerHTML = "";
+        products.forEach(function (product) {
+          const productInCart = cart.find(function (item) { return item.id === product.id; });
+          const checked = productInCart ? "checked" : "";
+          const quantity = productInCart ? productInCart.quantity : 1;
+          orderProductList.insertAdjacentHTML("beforeend", "<div><label style='display:flex;gap:8px;align-items:flex-start;'><input type='checkbox' class='order-check' data-id='" + product.id + "' " + checked + "><span><strong>" + safeHTML(product.name) + "</strong><br><span class='muted'>GHS " + product.price + "</span></span></label><input type='number' min='1' class='order-qty' data-id='" + product.id + "' value='" + quantity + "' style='width:100%;margin-top:10px;'></div>");
+        });
+      }
+
+      function syncOrderSelectionToCart() {
+        const selectedProducts = [];
+        document.querySelectorAll(".order-check").forEach(function (checkbox) {
+          if (!checkbox.checked) return;
+          const productId = Number(checkbox.dataset.id);
+          const quantityInput = document.querySelector(".order-qty[data-id='" + productId + "']");
+          const quantity = Math.max(1, Number(quantityInput.value) || 1);
+          const product = products.find(function (item) { return item.id === productId; });
+          if (product) selectedProducts.push(Object.assign({}, product, { quantity: quantity }));
+        });
+        cart = selectedProducts;
+        updateCart();
+      }
+
+      function addSelectedProductsToCart() {
+        syncOrderSelectionToCart();
+        if (cart.length === 0) { alert("Please tick at least one product first."); return; }
+        document.getElementById("cart").scrollIntoView({ behavior: "smooth" });
+      }
+
+      function updateMomoDisplay() {
+        document.getElementById("momoProviderText").textContent = momoDetails.provider;
+        document.getElementById("momoNumberText").textContent = momoDetails.momoNumber;
+        document.getElementById("momoNameText").textContent = momoDetails.accountName;
+      }
+
+      function prepareMomoPayment() {
+        syncOrderSelectionToCart();
+        if (cart.length === 0) { alert("Please tick at least one product first."); return; }
+        let total = 0;
+        cart.forEach(function (item) { total += item.price * item.quantity; });
+        alert("Please pay GHS " + total + " via " + momoDetails.provider + " to " + momoDetails.momoNumber + " (" + momoDetails.accountName + ").\n\nAfter payment, enter your transaction ID/reference before submitting the order.");
+      }
+
+      orderForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        syncOrderSelectionToCart();
+        if (cart.length === 0) { alert("Please select at least one product."); return; }
+        const name = document.getElementById("customerName").value.trim();
+        const phone = document.getElementById("customerPhone").value.trim();
+        const location = document.getElementById("customerLocation").value.trim();
+        const delivery = document.getElementById("deliveryOption").value;
+        const notes = document.getElementById("extraNotes").value.trim();
+        const paymentReference = document.getElementById("paymentReference").value.trim();
+        if (!name || !phone || !location || !delivery) { alert("Please fill all required fields."); return; }
+        let total = 0;
+        let productMessage = "";
+        cart.forEach(function (item) { const subtotal = item.price * item.quantity; total += subtotal; productMessage += "\n- " + item.name + " x " + item.quantity + " = GHS " + subtotal; });
+        const order = { id: Date.now(), customerName: name, customerPhone: phone, customerLocation: location, deliveryOption: delivery, extraNotes: notes || "None", paymentMethod: "Mobile Money", paymentProvider: momoDetails.provider, momoNumber: momoDetails.momoNumber, paymentReference: paymentReference || "Not provided", cart: cart.slice(), total: total, status: "Pending", createdAt: new Date().toLocaleString() };
+        const savedOrders = JSON.parse(localStorage.getItem("mamaToobaOrders") || "[]");
+        savedOrders.push(order);
+        localStorage.setItem("mamaToobaOrders", JSON.stringify(savedOrders));
+        const whatsappMessage = "Hello Mama Tooba, I want to place an order.\n\nOrder ID: " + order.id + "\n\nCustomer Name: " + name + "\nPhone Number: " + phone + "\nLocation: " + location + "\nDelivery Option: " + delivery + "\n\nProducts Ordered:" + productMessage + "\n\nTotal Amount: GHS " + total + "\n\nPayment Method: Mobile Money\nMoMo Provider: " + momoDetails.provider + "\nMoMo Number Paid To: " + momoDetails.momoNumber + "\nTransaction ID / Reference: " + (paymentReference || "Not provided") + "\n\nExtra Notes: " + (notes || "None");
+        renderOrders();
+        cart = [];
+        updateCart();
+        event.target.reset();
+        window.open("https://wa.me/" + mamaToobaWhatsAppNumber + "?text=" + encodeURIComponent(whatsappMessage), "_blank");
+      });
+
+      function renderOrders() {
+        const savedOrdersContainer = document.getElementById("savedOrders");
+        const orders = JSON.parse(localStorage.getItem("mamaToobaOrders") || "[]").reverse();
+        if (orders.length === 0) { savedOrdersContainer.innerHTML = "<p>No saved orders yet.</p>"; return; }
+        savedOrdersContainer.innerHTML = "";
+        orders.forEach(function (order) {
+          const productsList = order.cart.map(function (item) { return "<li>" + safeHTML(item.name) + " x " + item.quantity + "</li>"; }).join("");
+          savedOrdersContainer.insertAdjacentHTML("beforeend", "<div class='order-box'><h4>Order ID: " + safeHTML(order.id) + "</h4><p><strong>" + safeHTML(order.customerName) + "</strong> | " + safeHTML(order.customerPhone) + " | " + safeHTML(order.customerLocation) + "</p><p>Delivery: " + safeHTML(order.deliveryOption) + " | Total: GHS " + order.total + "</p><p><strong>Payment:</strong> " + safeHTML(order.paymentProvider || "Mobile Money") + " | Ref: " + safeHTML(order.paymentReference || "Not provided") + "</p><p class='muted'>" + safeHTML(order.createdAt) + "</p><ul>" + productsList + "</ul><p>Notes: " + safeHTML(order.extraNotes) + "</p></div>");
+        });
+      }
+
+      function clearOrders() { if (confirm("Clear all saved orders from this browser?")) { localStorage.removeItem("mamaToobaOrders"); renderOrders(); } }
+      function downloadOrders() { const orders = localStorage.getItem("mamaToobaOrders") || "[]"; const blob = new Blob([orders], { type: "application/json" }); const url = URL.createObjectURL(blob); const link = document.createElement("a"); link.href = url; link.download = "mama-tooba-orders.json"; link.click(); URL.revokeObjectURL(url); }
+
+      function showBotMessage(message) { chatMessages.insertAdjacentHTML("beforeend", "<div class='bot'>" + message + "</div>"); chatMessages.scrollTop = chatMessages.scrollHeight; }
+      function showUserMessage(message) { chatMessages.insertAdjacentHTML("beforeend", "<div class='user'>" + safeHTML(message) + "</div>"); chatMessages.scrollTop = chatMessages.scrollHeight; }
+      function quickAsk(text) { showUserMessage(text); replyToCustomer(text.toLowerCase()); }
+
+      function recommend(type) {
+        const productSets = { growth: [3, 4, 6, 7, 8], dandruff: [1, 2, 3, 8], breakage: [3, 4, 6, 7, 8], styling: [5, 8], wash: [1, 2, 3, 8], default: [8] };
+        const names = { growth: "Hair Oil, 3 in 1 Hair Food, Booster Powder and Super Treatment", dandruff: "Shampoo, Conditioner and Hair Oil", breakage: "Hair Oil, 3 in 1 Hair Food, Booster Powder and Super Treatment", styling: "Setting Lotion", wash: "Shampoo, Conditioner and Hair Oil", default: "5 in 1 Beauty Pack (Set)" };
+        const selectedProducts = productSets[type] || productSets.default;
+        const selectedNames = names[type] || names.default;
+        return "<br><br><strong>Mama Tooba Recommendation:</strong> " + selectedNames + "<br><button class='btn small' onclick='addRecommendedProducts(\"" + selectedProducts.join(",") + "\")'>Add Recommended Products</button>";
+      }
+
+      function addRecommendedProducts(productIdText) {
+        const ids = String(productIdText).split(",").map(function (id) { return Number(id.trim()); }).filter(function (id) { return !Number.isNaN(id); });
+        ids.forEach(addToCart);
+        showBotMessage("Recommended products have been added to your cart.");
+      }
+
+      function replyToCustomer(text) {
+        let response = "";
+        if (/growth|grow|long hair|booster/.test(text)) response = "Healthy-looking hair growth needs a clean scalp, moisture, gentle handling and consistent care." + recommend("growth");
+        else if (/dandruff|itchy|scalp|smell|odour|odor/.test(text)) response = "Dandruff, itchy scalp or bad smell may come from dryness, buildup or scalp imbalance. A clean wash routine can help." + recommend("dandruff");
+        else if (/break|fall|edge|edges|loss|thin|bald/.test(text)) response = "Hair breakage, fallouts and receding edges may be worsened by tight hairstyles, dryness and harsh combing." + recommend("breakage");
+        else if (/style|lotion|salon/.test(text)) response = "For neat styling, wrapping and finishing, use Mama Tooba Setting Lotion." + recommend("styling");
+        else if (/wash|shampoo|conditioner/.test(text)) response = "For washing, use Mama Tooba Shampoo, follow with Conditioner, then apply Hair Oil lightly after drying." + recommend("wash");
+        else if (/natural|permed|dread|dreadlock/.test(text)) response = "Mama Tooba Hair Products are suitable for natural hair, permed hair and dreadlocks." + recommend("default");
+        else if (/order|buy|purchase/.test(text)) response = "To order, tick your products, add quantities, click Prepare Mobile Money Payment, pay, enter transaction ID, and submit order to WhatsApp.";
+        else if (/payment|pay|momo|mobile money/.test(text)) response = "To prepare payment, select products and quantities, then click Prepare Mobile Money Payment. Pay to " + momoDetails.momoNumber + " (" + momoDetails.accountName + ") and enter your transaction ID before submitting.";
+        else if (/agent|branch|location|near/.test(text)) response = "Click Agent List in the menu to view Mama Tooba branches in Ghana and abroad.";
+        else if (/price|cost|how much/.test(text)) response = "Product prices are shown on each product card in Ghana Cedis.";
+        else if (/delivery|pickup/.test(text)) response = "Choose Pickup or Delivery when placing your order. Delivery depends on your location.";
+        else if (/whatsapp|contact|call/.test(text)) response = "Contact Mama Tooba on WhatsApp: 0241099968, Mobile: 0597620655, Email: mamatoobaproducts@gmail.com.";
+        else response = "Tell me your hair concern, for example: hair growth, dandruff, receding edges, breakages, itchy scalp, bad smell, natural hair, permed hair, dreadlocks, payment, price, agents, delivery or ordering." + recommend("default");
+        setTimeout(function () { showBotMessage(response); }, 300);
+      }
+
+      chatToggle.addEventListener("click", function () { chatBox.style.display = chatBox.style.display === "block" ? "none" : "block"; if (chatMessages.innerHTML.trim() === "") showBotMessage("Hello. Welcome to Mama Tooba Hair Products. Tell me your hair concern and I will recommend suitable products."); });
+      chatInput.addEventListener("keydown", function (event) { if (event.key === "Enter") { event.preventDefault(); const message = chatInput.value.trim(); if (!message) return; showUserMessage(message); replyToCustomer(message.toLowerCase()); chatInput.value = ""; } });
+
+      function runTests() {
+        console.assert(products.length === 8, "Expected 8 products");
+        console.assert(products[0].price === 80, "Shampoo price should be 80");
+        console.assert(products[6].price === 100, "Super Treatment price should be 100");
+        console.assert(products[7].price === 230, "5 in 1 Beauty Pack price should be 230");
+        console.assert(products.every(function (p) { return p.image.indexOf("http") !== 0; }), "Product images should not use URL links");
+        console.assert(mamaToobaWhatsAppNumber === "233241099968", "WhatsApp number should be correct");
+        console.assert(Boolean(chatToggle), "AI chat toggle should exist");
+        console.assert(typeof prepareMomoPayment === "function", "Prepare MoMo payment function should exist");
+        console.assert(momoDetails.momoNumber === "0241099968", "MoMo number should be correct");
+      }
+
+      window.addToCart = addToCart;
+      window.removeFromCart = removeFromCart;
+      window.increaseQuantity = increaseQuantity;
+      window.decreaseQuantity = decreaseQuantity;
+      window.goToCheckout = goToCheckout;
+      window.orderNowProduct = orderNowProduct;
+      window.addSelectedProductsToCart = addSelectedProductsToCart;
+      window.renderOrders = renderOrders;
+      window.clearOrders = clearOrders;
+      window.downloadOrders = downloadOrders;
+      window.prepareMomoPayment = prepareMomoPayment;
+      window.quickAsk = quickAsk;
+      window.addRecommendedProducts = addRecommendedProducts;
+
+      displayProducts();
+      updateMomoDisplay();
+      updateCart();
+      renderOrders();
+      runTests();
+    });
+  </script>
+</body>
+</html>
